@@ -15,3 +15,5 @@ if __name__ == '__main__':
     log.logger.info('info')
 
     # this dev
+    # this is debug
+    
