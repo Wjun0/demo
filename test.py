@@ -13,3 +13,5 @@ if __name__ == '__main__':
     log = Logger('all_log',level='debug')
     log.logger.error('error')
     log.logger.info('info')
+
+    # dev
