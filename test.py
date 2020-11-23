@@ -14,9 +14,7 @@ if __name__ == '__main__':
     log.logger.error('error')
     log.logger.info('info')
 
-
-
-    # pro
     # this dev
-
+    # this is debug
+    # debug ok
 
