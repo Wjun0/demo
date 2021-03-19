@@ -70,6 +70,7 @@ def ts():
 if __name__ == '__main__':
 
 
+
     # sc.add_job(log_test, 'interval',seconds=10, next_run_time=datetime.datetime.now())
     # start_time = datetime.datetime.strptime('2021-02-02 14:20:00','%Y-%m-%d %H:%M:%S')
     # sc.add_job(ts, 'interval',seconds=10, next_run_time=start_time)
@@ -123,4 +124,8 @@ if __name__ == '__main__':
     #     print('!=')
 
 
+    # this dev
+    # this is debug
+    # debug ok
+    # add debug
 
