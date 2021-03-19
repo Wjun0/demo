@@ -1,5 +1,0 @@
-2020-11-20 11:11:50,757 - C:/Users/Administrator/Desktop/demo/test.py[line:34] - DEBUG: debug
-2020-11-20 11:11:50,757 - C:/Users/Administrator/Desktop/demo/test.py[line:35] - INFO: info
-2020-11-20 11:11:50,757 - C:/Users/Administrator/Desktop/demo/test.py[line:36] - WARNING: 警告
-2020-11-20 11:11:50,757 - C:/Users/Administrator/Desktop/demo/test.py[line:37] - ERROR: 报错
-2020-11-20 11:11:50,757 - C:/Users/Administrator/Desktop/demo/test.py[line:38] - CRITICAL: 严重

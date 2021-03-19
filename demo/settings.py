@@ -31,8 +31,14 @@ SECRET_KEY = 'fs+w)ukcpl5bj-jk3lz&%**#hd!bw24sj8!e*-wo5b1*nc9l33'
 DEBUG = True
 
 # ALLOWED_HOSTS是白名单.
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["127.0.0.1"]
+# ALLOWED_HOSTS = ["*"]
 
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+)
+CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
 
 # Application definition
 
@@ -43,13 +49,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
     'users.apps.UsersConfig',
     'requresp.apps.RequrespConfig',
+    'db2_test',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -82,11 +93,30 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sql_test',
+        'PASSWORD':'mysql',
+        'PORT':3306,
+        'HOST':'127.0.0.1',
+        'USER':'root',
+        # 'CONN_MAX_AGE':15,  #在视图函数请求之前和请求之后才检查
+    },
+    'db2':{
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sql_test2',
+        'PASSWORD':'mysql',
+        'PORT':3306,
+        'HOST':'127.0.0.1',
+        'USER':'root',
     }
 }
+DATABASE_ROUTERS = ['demo.database_router.DatabaseAppsRouter']
+
 
 
 # Password validation

@@ -17,7 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    # url(r'^admin/', admin.site.urls),
     url(r'^user/', include('users.urls', namespace='username')),
     url(r'^', include('requresp.urls')),
+    url(r'^db2/', include('db2_test.urls')),
 ]

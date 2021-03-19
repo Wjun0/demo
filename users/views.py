@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse,JsonResponse
 
@@ -5,22 +7,23 @@ from django.http import HttpResponse,JsonResponse
 # Create your views here.
 from django.urls import reverse
 
+from django.db import close_old_connections
 
-def index(request):
-    '''
-    索引的视图函数: 接口
-    :param request:
-    :return:
-    '''
-    print('index')
+from users import urls
+from users.models import Student
 
-    # result = 1 / 0
+from django.conf.urls import url,include
+# from arya.service.sites import site
+from django.urls.resolvers import RegexURLPattern
+from django.urls.resolvers import RegexURLResolver
+from django.shortcuts import HttpResponse
 
-    return HttpResponse('hello django')
+
 
 
 def say(request):
     print('say')
+    time.sleep(500)
     return HttpResponse('say')
 
 
@@ -101,3 +104,29 @@ def test(request):
     print(res)
     print(type(res))
     return JsonResponse(res,safe=False)
+
+
+def index(request):
+    from demo.urls import urlpatterns
+    print(get_all_url(urlpatterns, prev='/'))
+    return HttpResponse('hello django')
+
+
+def get_all_url(urlparrentens,prev,is_first=False,result=[]):
+
+    for item in urlparrentens:
+        v = item._regex.strip('^$')#去掉url中的^和$
+        if isinstance(item,RegexURLPattern):
+            result.append(prev + v)
+
+        # 处理总路由为：url(r'^', include('requresp.urls') 形式的
+        elif isinstance(item, RegexURLResolver):
+            dic = item.reverse_dict.values()
+            for i in dic:
+                print(i[1])
+                result.append(item._regex + i[1])
+    print(result)
+    res = []
+    for item in result:
+        res.append(item.strip('^$'))
+    return res
