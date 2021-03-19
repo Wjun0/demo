@@ -18,3 +18,4 @@ res = session.get(url=url)
 print(res)
 
 dev = ""
+dev2 = ""
