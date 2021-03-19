@@ -16,3 +16,5 @@ url = "http://127.0.0.1:8080/students/"
 
 res = session.get(url=url)
 print(res)
+
+dev = ""
