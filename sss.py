@@ -2,6 +2,7 @@
 
 import json
 import requests
+import time
 
 def request(method,url,rData):
     headers = {
@@ -33,7 +34,8 @@ def getCoursesList(rData):
     print(courseData)
     courseIdList = dict()
     for item in courseData:
-        if item['learningProgress'] == 0:
+        # 修改课程当前状态 ，0：必修； 2：逾期
+        if item['learningProgress'] == 0 or item['learningProgress'] == 2:
             courseIdList[item['courseId']] = item['courseName']
 
     print(courseIdList)
@@ -47,6 +49,7 @@ def queryCourseDetail(rData,courseId):
     courseDetailData = cd['body']['courseFileArr']
     coursewareIdList = dict()
     for item in courseDetailData:
+        time.sleep(10)
         coursewareIdList[item['coursewareId']] = item['fileName']
     return coursewareIdList
 
@@ -60,7 +63,7 @@ def uploadLearnFlag(rData,coursewareId):
 
 def main():
     rData = {
-        'sid': '5F8762A079FB4BCFA9A18977E2EA8981',
+        'sid': 'B75AC5F6176E44C3962B1861D5ABD5E1',
         "Cookie": "Hm_lvt_80e714466be8b29412a73567cc4dee53=1611833682,1614161611; BIGipServerhrmsv3-mlearning_DMZ_CLOUD_PrdPool_HIPPO=1462704556.8073.0000"
 
     }

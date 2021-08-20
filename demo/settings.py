@@ -73,7 +73,7 @@ ROOT_URLCONF = 'demo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,12 +99,17 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE': 'dj_db_conn_pool.backends.mysql',
         'NAME': 'sql_test',
         'PASSWORD':'mysql',
         'PORT':3306,
         'HOST':'127.0.0.1',
-        'USER':'root',
+        'USER':'wangjun',
         # 'CONN_MAX_AGE':15,  #在视图函数请求之前和请求之后才检查
+        # "POOL_OPTIONS":{
+        #     "POOL_SIZE":2,
+        #     "MAX_OVERFLOW":1
+        # }
     },
     'db2':{
         'ENGINE': 'django.db.backends.mysql',

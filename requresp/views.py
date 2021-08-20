@@ -1,3 +1,6 @@
+from itertools import chain
+
+from django.db.models import Q
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -7,10 +10,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from requresp.serializers import StudentSerizlizers
-from users.models import Student
+from users.models import Student, Emp
 import random
 from django.db import transaction
 import datetime
+import django.utils.timezone
 
 def getquerystring(request):
     '''
@@ -37,23 +41,50 @@ class Student_index(GenericAPIView):
 
     def get(self,request):
         queryset = self.get_queryset()
-        queryset = queryset.filter(sname='注册')
-        ser = self.get_serializer(queryset, many=True)
+        # queryset = queryset.filter(sname='注册')
+
+        res_queryset = []
+        list = ['t2',"t3"]
+        res_queryset = queryset.filter(sname__icontains=[list[0]])
+        for i in list:
+            # res_queryset.append(queryset.filter(sname__icontains=i))
+            res_queryset = queryset.filter(sname__icontains=i) | res_queryset
+        # queryset = chain(res_queryset)
+        ser = self.get_serializer(res_queryset, many=True)
         return Response(ser.data)
 
-    def post(self,request):
-        random_name = ['域名','是需','要注','册的','当域','名被','注册','信息']
-        item = {
-            'sno': 333,
-            'sname': random.choice(random_name),
-            'ssex': random.choice(['男','女']),
-            'sbirthday': '2021-02-02 0:0:0',
-            'sclass': '9000'
-        }
 
-        serailizer = self.get_serializer(data=item)
-        serailizer.is_valid(raise_exception=True)
-        serailizer.save()
+    def post(self,request):
+        random_name = [ ["t1",'t2',"t3"],
+                        ["t1","t4"],
+                        ["t2"],
+                        [],
+                        ["t1","t3"]
+        ]
+        item_list = []
+        for i in range(4000,5000):
+            item = {
+                'sno': i,
+                'sname': random.choice(random_name),
+                'ssex': random.choice(['男', '女']),
+                'sbirthday': '2021-02-02 0:0:0',
+                'sclass': '9000'
+            }
+            item_list.append(Student(**item))
+        Student.objects.bulk_create(item_list)
+
+
+        # item = {
+        #     'sno': 333,
+        #     'sname': random.choice(random_name),
+        #     'ssex': random.choice(['男','女']),
+        #     'sbirthday': '2021-02-02 0:0:0',
+        #     'sclass': '9000'
+        # }
+        #
+        # serailizer = self.get_serializer(data=item)
+        # serailizer.is_valid(raise_exception=True)
+        # serailizer.save()
 
         # with transaction.atomic():
         #     for i in range(1,20000):
@@ -85,3 +116,12 @@ class Student_index(GenericAPIView):
         print(ser.error)
         ser.save()
         return Response({'message':'ok'})
+
+
+
+class EmpAPI(APIView):
+    def get(self,request):
+        duty = ['初级程序员']
+        Emp.objects.filter(deptno="01").filter(~Q(duty__in=duty)).update(sal=3500)
+        return Response({"message":"ok"})
+
