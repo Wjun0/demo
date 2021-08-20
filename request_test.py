@@ -37,9 +37,5 @@ class Weixin_sogo():
 
 
 
-
-
-
-
 if __name__ == '__main__':
     Weixin_sogo().run()
