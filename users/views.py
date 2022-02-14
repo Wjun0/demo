@@ -1,28 +1,26 @@
-import binascii
-from io import StringIO
 
-from django.shortcuts import render, redirect
-from django.http import HttpResponse,JsonResponse
+from django.conf import settings
+from django.http import HttpResponse, JsonResponse, FileResponse
+from xlwt import Workbook
 
-
-# Create your views here.
-from django.urls import reverse
-
-from django.db import close_old_connections
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-from users import urls
 from users.models import Student, Emp
-
-from django.conf.urls import url,include
-# from arya.service.sites import site
-from django.urls.resolvers import RegexURLPattern
-from django.urls.resolvers import RegexURLResolver
+# from django.urls.resolvers import RegexURLPattern
+# from django.urls.resolvers import RegexURLResolver
 from django.shortcuts import HttpResponse
 import os
-from xlwt import *
+# from xlwt import *
 
+def static_img(request,path):
+    # 返回图片文件
+    from pathlib import Path
+    import mimetypes
+    from django.utils.http import http_date
+    full_path = Path(settings.IMG_PATH + "/"+path)
+    content_type,encoding = mimetypes.guess_type(str(full_path))
+    static_obj = full_path.stat()
+    response = FileResponse(full_path.open('rb'),content_type=content_type)
+    response['Last-Modified'] = http_date(static_obj.st_mtime)
+    return response
 
 
 def xss_f(request):
@@ -32,7 +30,6 @@ def xss_f(request):
     from django.utils.html import strip_tags
     text = strip_tags(text)
     #############
-
     html = """
     <html>
         <body>

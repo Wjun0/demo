@@ -16,6 +16,11 @@ import logging
 logging.basicConfig(filename='sss.log',level=logging.INFO)
 
 
+def github_test():
+    key = "pab.com.cn"
+    keyy2 = "pingan.com.cn"
+    # 测试github 监控是否正常监控
+    return
 
 def random_key(length=20):
     return "".join(
@@ -40,6 +45,8 @@ class A():
 
 
 from apscheduler.schedulers.background import BlockingScheduler
+from apscheduler.triggers.cron import CronTrigger
+from apscheduler.triggers.interval import IntervalTrigger
 sc = BlockingScheduler()
 
 
@@ -90,39 +97,89 @@ def apschedul(i):
     time.sleep(10)
 
 
+def calculate_num(k):
+    return k+1,k
+
+
+def xss_filter(string):
+    import bleach
+    from bleach.sanitizer import ALLOWED_TAGS,ALLOWED_ATTRIBUTES
+    print(string)
+    new_content = bleach.clean(string,tags=ALLOWED_TAGS,attributes=ALLOWED_ATTRIBUTES)
+    print("===============")
+    print(new_content)
+
+
+def jwt_test():
+    data = {"username":"wangjun","name":"王军"}
+    from itsdangerous import TimedJSONWebSignatureSerializer
+    ser = TimedJSONWebSignatureSerializer("key",10)
+    token = ser.dumps(data).decode()
+    print(token)
+    t = ser.loads(token.encode())
+    print(t)
+
+def pad_key(key):
+    while len(key) % 16 != 0:
+        key += b' '
+    return key
+
 
 
 
 if __name__ == '__main__':
+    import sys
+
+
+    res = requests.get("http://www.baidu.com")
+    rest = requests.get("http://www.baidu.com",proxies={"http":"29.2.72.212:8080"})
+
+    a = datetime.datetime.now().strftime("%Y-m-%dT%H:%M:%S.11Z")
+    print(time.time())
+
+    from Crypto.Cipher import AES
+    import base64
+    # key = "sdfssasdf"
+    # sec = pad_key(key.encode())
+    # obj = AES.new(sec, AES.MODE_CBC)
+    # message = "The answer is no"
+    # ciphertext = obj.encrypt(message.encode())
+    # sign = str(base64.encodebytes(ciphertext),encoding='utf8').replace('\n','')
+    # print(sign)
+
+    secort = "sdfsdfasasssssss"
+    data = {'name':"wangjun"}
+    obj = AES.new(secort.encode(),AES.MODE_EAX,)
+    ctext = obj.decrypt(pad_key(str(data).encode()))
+    sign = str(base64.encodebytes(ctext),encoding='utf8').replace('\n','')
+    print(sign)
+
+    obj1 = AES.new(secort.encode(),AES.MODE_EAX, obj.nonce)
+    d = obj.encrypt(sign.encode())
+    print(d)
+
+    jwt_test()
+
+    str = "<script>xx<img/src/onerror=alert(/xss/)></script>"
+    xss_filter(str)
+
+    executor = ThreadPoolExecutor(max_workers=5)
+    all_task = [executor.submit(calculate_num,i) for i in range(10)]
+    wait(all_task,return_when=ALL_COMPLETED)
+    for i in all_task:
+        k,v = i.result()
+
+
+
+    url = "http://cat.fat.com.cn/login1"
+    from url_normalize import url_normalize
+    new_url = url_normalize(url)
+
+    import suds
     key = binascii.hexlify(os.urandom(20)).decode()
 
-
-    q = 0/1
-    print(q)
-    s1 = {1,2,3}
-    s2 = {2,3,4}
-    s1 = s1 | s2
-
-    list1 = [111,22]
-    l = list1.extend([333])
-    print(l)
-    t1 = "2021-03-03 12:12:12"
-    t2 = "2021-03-03 13:12:12"
-    t11 = datetime.datetime.strptime(t1,"%Y-%m-%d %H:%M:%S")
-    t22 = datetime.datetime.strptime(t2,"%Y-%m-%d %H:%M:%S")
-    d = (t22-t11).total_seconds()
-    import datetime
-    d = datetime.datetime.now().isoweekday()
-    if d not in [6,7]:
-        print(d)
-    print(datetime.datetime.now())
-
-    import socket
-    from concurrent.futures import ThreadPoolExecutor
-    executor = ThreadPoolExecutor(max_workers=5)
-    all_task = [executor.submit(apschedul,i) for i in range(10)]
-    time.sleep(10)
-    print("==")
+    sc.add_job(ts, trigger=CronTrigger(minute=40,second=50))
+    sc.start()
 
 
 

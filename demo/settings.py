@@ -40,6 +40,8 @@ CORS_ORIGIN_WHITELIST = (
 )
 CORS_ALLOW_CREDENTIALS = True  # 允许携带cookie
 
+IMG_PATH = os.path.join(BASE_DIR,'static_files')
+
 # Application definition
 
 INSTALLED_APPS = [
