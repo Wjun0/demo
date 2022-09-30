@@ -10,7 +10,7 @@ basepath = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.insert(0,basepath)
 
-from log import Logger
+from test_demo.log import Logger
 
 import logging
 logging.basicConfig(filename='sss.log',level=logging.INFO)
@@ -46,7 +46,7 @@ class A():
 
 from apscheduler.schedulers.background import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
-from apscheduler.triggers.interval import IntervalTrigger
+
 sc = BlockingScheduler()
 
 
@@ -175,7 +175,6 @@ if __name__ == '__main__':
     from url_normalize import url_normalize
     new_url = url_normalize(url)
 
-    import suds
     key = binascii.hexlify(os.urandom(20)).decode()
 
     sc.add_job(ts, trigger=CronTrigger(minute=40,second=50))
