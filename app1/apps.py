@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class RequrespConfig(AppConfig):
-    name = 'requresp'
+    name = 'app1'

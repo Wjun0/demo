@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import serializers
-from db2_test.models import Db2_users
+from app2_de2_test.models import Db2_users
 
 from concurrent.futures import ThreadPoolExecutor
 
@@ -49,8 +49,8 @@ class UserUpdate(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = Db2_users.objects.all()
     # def get(self,reqeust):
-    #     users = [user.name for user in Db2_users.objects.all()]
-    #     return Response(users)
+    #     app_users = [user.name for user in Db2_users.objects.all()]
+    #     return Response(app_users)
 
 
     # def patch(self, request, *args, **kwargs):

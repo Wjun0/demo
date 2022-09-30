@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse, JsonResponse, FileResponse
 from xlwt import Workbook
 
-from users.models import Student, Emp
+from app_users.models import Student, Emp
 # from django.urls.resolvers import RegexURLPattern
 # from django.urls.resolvers import RegexURLResolver
 from django.shortcuts import HttpResponse
@@ -219,7 +219,7 @@ def get_all_url(urlparrentens,prev,is_first=False,result=[]):
         if isinstance(item,RegexURLPattern):
             result.append(prev + v)
 
-        # 处理总路由为：url(r'^', include('requresp.urls') 形式的
+        # 处理总路由为：url(r'^', include('app1.urls') 形式的
         elif isinstance(item, RegexURLResolver):
             dic = item.reverse_dict.values()
             for i in dic:

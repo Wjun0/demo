@@ -1,4 +1,4 @@
-from users.models import Student
+from app_users.models import Student
 from rest_framework.serializers import ModelSerializer
 
 

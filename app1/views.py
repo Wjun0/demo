@@ -9,8 +9,8 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from requresp.serializers import StudentSerizlizers
-from users.models import Student, Emp
+from app1.serializers import StudentSerizlizers
+from app_users.models import Student, Emp
 import random
 from django.db import transaction
 import datetime

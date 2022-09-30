@@ -53,9 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'users.apps.UsersConfig',
-    'requresp.apps.RequrespConfig',
-    'db2_test',
+    'app_users.apps.UsersConfig',
+    'app1.apps.RequrespConfig',
+    'app2_de2_test',
 ]
 
 MIDDLEWARE = [

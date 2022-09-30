@@ -10,5 +10,5 @@ class Db2_users(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'users'
-        app_label = 'db2_test'
+        db_table = 'app_users'
+        app_label = 'app2_de2_test'
