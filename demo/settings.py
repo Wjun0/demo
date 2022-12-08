@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'app_users.apps.UsersConfig',
     'app1.apps.RequrespConfig',
-    'app2_de2_test',
+    'app2_db2_test',
 ]
 
 MIDDLEWARE = [

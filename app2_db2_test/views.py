@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics
 from rest_framework import serializers
-from app2_de2_test.models import Db2_users
+from app2_db2_test.models import Db2_users
 
 from concurrent.futures import ThreadPoolExecutor
 

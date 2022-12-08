@@ -1,3 +1,4 @@
+
 from itertools import chain
 
 from django.db.models import Q
@@ -124,4 +125,14 @@ class EmpAPI(APIView):
         duty = ['初级程序员']
         Emp.objects.filter(deptno="01").filter(~Q(duty__in=duty)).update(sal=3500)
         return Response({"message":"ok"})
+
+
+def upload(request):
+    if request.method == 'POST':
+        file = request.FILES.get('dock')
+        file_name = request.FILES.get('dock').name
+        with open(file_name, 'r+')as f:
+            f.write(file)
+        return Response(status=200)
+
 

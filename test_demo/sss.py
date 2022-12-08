@@ -63,7 +63,7 @@ def uploadLearnFlag(rData,coursewareId):
 
 def main():
     rData = {
-        'sid': '904D2C04AA9B411F9E14FD1EE86FDCBD',
+        'sid': 'FC94C1D7E3564283B0D5A99D63BAEDE2',
         "Cookie": "BIGipServerhrmsv3-mlearning_DMZ_CLOUD_PrdPool_HIPPO=3006635735.8073.0000; BIGipServerPOOL_PACLOUD_PRDR2020110936439=525343148.136.0000; Hm_lvt_80e714466be8b29412a73567cc4dee53=1641780727; Hm_lpvt_80e714466be8b29412a73567cc4dee53=1641780727"
 
     }
