@@ -6,13 +6,22 @@ env = os.environ
 print(env)
 os.environ['ENV'] = "uat"
 
+def test():
+    import requests
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36",
+               "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ7XCJvcmdJZFwiOlwiaGViZWl6aG9uZ3lhblwiLFwiYXBwaWRcIjpcInd4YWU4YmFhZTU2NmFhODc1OFwiLFwib3BlbmlkXCI6XCJvMVVjTTZJaVppUE9pQXktNmtVWVM5ZWV1S05nXCIsXCJ1bmlvbmlkXCI6XCJvMEhKVjBneGplN3M1MHRIdl9UWUp5clViNUpNXCIsXCJsb2dpblRpbWVcIjoxNjcwODk3OTE4MzIzLFwidGFnXCI6XCIxNjcwODk2NTQ1OTA0TDlDWjE1VThYNjFORFRaXCIsXCJ1c2VySWRcIjoxMTEzNjM2ODgzfSIsImV4cCI6MTY3MDkwMTUxOH0.7fBM3ey11M6VbK-VGLpVNrBwRZ65JAia2dabl-NaXTQ"}
+    resp = requests.get('https://hbz.qrmkt.cn/syx/scan/checkResult', headers=headers)
+    print(resp)
+    print(resp.text)
+
+
+def get_token():
+    import requests
+    j_data = {"url": "https://hbz.qrmkt.cn/yx/views/common/yz.html"}
+    res = requests.post("https://hbz.qrmkt.cn/syx/wx/jsapi",json=j_data)
+    print(res.text)
 
 if __name__ == '__main__':
-    s = """
-    <h2><strong>1.1.       </strong>2370可水平越权删除我的购物车漏洞</h2>↵<h3><a name="_Toc95751516"></ a><strong>1.1.1.    </strong>漏洞描述</h3>↵<table>↵<tbody>↵<tr>↵<td width="113">↵<p>漏洞描述</p >↵</td>↵<td width="440">↵<p>可水平越权删除我的购物车</p >↵</td>↵</tr>↵<tr>↵<td width="113">↵<p>可利用场景</p >↵</td>↵<td width="440">↵<p> </p >↵</td>↵</tr>↵<tr>↵<td width="113">↵<p>风险等级</p >↵</td>↵<td width="440">↵<p>低</p >↵</td>↵</tr>↵</tbody>↵</table>↵<p> </p >↵<h3><a name="_Toc95751517"></ a><strong>1.1.2.    </strong>漏洞验证和POC</h3>↵<p>接口：</p >↵<p>< a href=" ">https://rmb-stg.pingan.com.cn/member/stp/guest/iep-website/wechat/callFunc</ a></p >↵<p>过程描述：</p >↵<p>       A用户登录小程序，进入我的购物车，选择某一购物车列表，进行删除，抓包。替换token为B用户，可删除成功。重新登录A，进入购物车，发现购物车已删除</p >↵<p>< img src="http://sop.uat.qa.pab.com.cn/vrm/files/editor_img/Fe33d3560b39a4ca3b3cd9f87ce16c5ca.png" /></p >↵<h3><a name="_Toc95751518"></ a><strong>1.1.3.    </strong>修复建议</h3>↵<p>鉴权、后端判断资源归属</p >
-    """
-    print(s.replace("↵",""))
-    pass
-    host = socket.gethostname()
-    ip = socket.gethostbyname(host)
-    print(host)
+    get_token()
+    test()
+
